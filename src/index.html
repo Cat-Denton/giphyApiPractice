@@ -2,4 +2,17 @@
   <title>jsEnvTemplate</title>
 </head>
 <body>
+  <div class="container">
+    <form id="giphyForm">
+      <div class="form-group">
+        <label for="searchTerm">Search for a .gif!</label>
+        <input id="searchTerm" type="text" placeholder="Enter a search term">
+      </div>
+      <button type="submit" class="btn btn-info">Get your .gif!</button>
+    </form>
+    <div class="showErrors"></div>
+    <div class="showGif">
+      <img id="gifToShow">
+    </div>
+  </div>
 </body>
