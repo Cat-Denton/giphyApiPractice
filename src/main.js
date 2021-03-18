@@ -11,23 +11,30 @@ function clearFields() {
   $('#showGif').attr("alt", "");
 }
 
-function displayGifs() {
+function displayGifs(index) {
   let showGifDiv = $("div#showGif");
-  let htmlForGifDiv = `<img id='gifToShow'>`
-  showGifDiv.html(htmlForGifDiv);
+  let htmlForGifDiv = `<img id='gifToShow${index}'>`
+  showGifDiv.append(htmlForGifDiv);
 }
 
 $("#giphyForm").submit(function() {
   let searchTerm = $('#searchTerm').val();
   clearFields();
-  displayGifs();
+  // displayGifs();
   let promise = GiphyService.getGiphy(searchTerm);
   promise.then(function(response) {
     const body = JSON.parse(response);
-    let gifUrl = `${body.data[0].images.original.url}`;
-    let gifTitle = `${body.data[0].title}`;
-    $('#gifToShow').attr('src',gifUrl);
-    $('#gifToShow').attr('alt',gifTitle);
+    let index
+    for(index=0;index<body.data.length;index++) {
+      displayGifs(index);
+      // /* eslint-disable */
+      // debugger;
+      /* eslint-enable */
+      let gifUrl = `${body.data[index].images.original.url}`;
+      let gifTitle = `${body.data[index].title}`;
+      $(`#gifToShow${index}`).attr('src',gifUrl);
+      $(`#gifToShow${index}`).attr('alt',gifTitle); 
+    }
   });
   event.preventDefault();
 });
