@@ -4,16 +4,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
 import GiphyService from './js/giphy-service';
 
-// function clearFields() {
-//   $("#searchTerm").val("");
-//   $('.showErrors').text("");
-//   $('.showGif').text("");
-// }
+function clearFields() {
+  $("#searchTerm").val("");
+  $('.showErrors').text("");
+  $('.showGif').attr("src", "");
+  $('.showGif').attr("alt", "");
+}
 
 $("#giphyForm").submit(function() {
-  console.log("hi");
   let searchTerm = $('#searchTerm').val();
-  // clearFields();
+  clearFields();
   let promise = GiphyService.getGiphy(searchTerm);
   promise.then(function(response) {
     const body = JSON.parse(response);
